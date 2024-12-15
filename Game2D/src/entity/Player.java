@@ -52,7 +52,7 @@ public class Player extends Entity {
     public void setDefaultValues(){
         worldX = gp.tileSize * 2;
         worldY = gp.tileSize * 16;
-        speed = 4;
+        speed = 3;
         direction = "up";
 
         // PLAYER STATUS (TRẠNG THÁI NHÂN VẬT)

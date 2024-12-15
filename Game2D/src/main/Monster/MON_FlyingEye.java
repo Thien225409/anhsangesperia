@@ -22,10 +22,10 @@ public class MON_FlyingEye extends Entity{
         defense = 0;
 	    exp =1;
         
-        solidArea.x = 4;
-        solidArea.y = 11;
-        solidArea.width = 27;
-        solidArea.height = 15;
+        solidArea.x = 0;
+        solidArea.y = 10;
+        solidArea.width = 48;
+        solidArea.height = 30;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         life = maxLife;
