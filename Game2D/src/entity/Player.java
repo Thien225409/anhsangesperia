@@ -3,13 +3,11 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-
 import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_EnergyDrink;
 import object.OBJ_HP;
 import object.OBJ_HP_half;
-
 public class Player extends Entity {
 
     KeyHandler keyH;
@@ -50,8 +48,8 @@ public class Player extends Entity {
     }
     
     public void setDefaultValues(){
-        worldX = gp.tileSize * 2;
-        worldY = gp.tileSize * 16;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 3;
         direction = "up";
 
@@ -69,8 +67,8 @@ public class Player extends Entity {
     }
     public void setDefaultPositions(){
         
-        worldX = gp.tileSize * 2;
-        worldY = gp.tileSize * 16;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         direction = "up";
     }
     public void restoreLife(){
@@ -80,7 +78,7 @@ public class Player extends Entity {
 
     public void setItems(){
         inventory.clear();
-        // inventory.add(new OBJ_Key(gp));
+        //inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_HP(gp));
         inventory.add(new OBJ_HP_half(gp));
         inventory.add(new OBJ_EnergyDrink(gp));
@@ -123,7 +121,6 @@ public class Player extends Entity {
         left7 = setup("/player/walk_left7", gp.tileSize, gp.tileSize);
         left8 = setup("/player/walk_left8", gp.tileSize, gp.tileSize);
     }
-
     public void getPlayerAttackImage(){
         attackUp1 = setup("/player/attack_right1.1", gp.tileSize*2, gp.tileSize);
         attackUp2 = setup("/player/attack_right1.2", gp.tileSize*2, gp.tileSize);
@@ -309,8 +306,7 @@ public class Player extends Entity {
             else{
                 // INVENTORY ITEMS (TÚI ĐỒ)
                 String text;
-                if(inventory.size() != maxInventorySize){
-                    inventory.add(gp.obj[i]);
+                if(canObtainItem(gp.obj[i]) == true){
                     text = "Đã nhận được " + gp.obj[i].name + "!";
                 }
                 else{
@@ -320,6 +316,43 @@ public class Player extends Entity {
                 gp.obj[i] = null;
             }
         }
+    }
+    public int searchItemIndexInInventory(String itemName){
+        for(int i = 0; i < inventory.size(); i ++){
+            if(inventory.get(i).name.equals(itemName) == true){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public boolean canObtainItem(Entity item){
+
+        boolean canObtain = false;
+
+        // CHECK IF STACKABLE
+        if(item.stackable == true){
+            int index = searchItemIndexInInventory(item.name);
+
+            if(index != -1){
+                inventory.get(index).amount++;
+                // System.out.println(amount);
+                canObtain = true;
+            }
+            else{// New item so need to check vacancy
+                if(inventory.size() != maxInventorySize){
+                    inventory.add(item);
+                    canObtain = true;
+                }
+
+            }
+        }
+        else{// NOT STACKABLE so check vacancy
+            if(inventory.size() != maxInventorySize){
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
     }
     public void interactNPC(int i){
         if(gp.keyH.enterPressed == true){
@@ -341,17 +374,13 @@ public class Player extends Entity {
         }
     }
     public void damageMonster(int i){
-
         if(i != 999){
             
             if(gp.monster[i].invincible == false){
 
                 int damage = attack - gp.monster[i].defense;
-
                 if(damage < 0) damage = 0;
-
                 gp.monster[i].life -= damage;
-
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
 

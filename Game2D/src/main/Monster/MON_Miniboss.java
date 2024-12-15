@@ -82,38 +82,38 @@ public class MON_Miniboss extends Entity{
         }
 		else{
 			setAction();
-		checkCollison();
-		if(collisionOn == false){
-			switch (direction) {
-				case "up":
-					if(worldY >= gp.tileSize){
-						worldY -= speed;
-					}     	     	
-					break;
-				case "down": 
-					if(worldY <= gp.tileSize*11){
-						worldY += speed;
-					}
-					break;
-				case "right": worldX += speed; break;
-				case "left": worldX -= speed; break;
-				default: break;
+			checkCollison();
+			if(collisionOn == false){
+				switch (direction) {
+					case "up":
+						if(worldY >= gp.tileSize){
+							worldY -= speed;
+						}     	     	
+						break;
+					case "down": 
+						if(worldY <= gp.tileSize*11){
+							worldY += speed;
+						}
+						break;
+					case "right": worldX += speed; break;
+					case "left": worldX -= speed; break;
+					default: break;
+				}
 			}
-		}
 
-		spriteCounter ++;
-		if(spriteCounter > 5){
-			if(spriteNum == 1) spriteNum = 2;
-			else if(spriteNum == 2) spriteNum = 3;
-			else if(spriteNum == 3) spriteNum = 4;
-			else if(spriteNum == 4) spriteNum = 5;
-			else if(spriteNum == 5) spriteNum = 6;
-			else if(spriteNum == 6) spriteNum = 7;
-			else if(spriteNum == 7) spriteNum = 8;
-			else if(spriteNum == 8) spriteNum = 9;
-			else if(spriteNum == 9) spriteNum = 1;               
-			spriteCounter = 0;
-		}
+			spriteCounter ++;
+			if(spriteCounter > 5){
+				if(spriteNum == 1) spriteNum = 2;
+				else if(spriteNum == 2) spriteNum = 3;
+				else if(spriteNum == 3) spriteNum = 4;
+				else if(spriteNum == 4) spriteNum = 5;
+				else if(spriteNum == 5) spriteNum = 6;
+				else if(spriteNum == 6) spriteNum = 7;
+				else if(spriteNum == 7) spriteNum = 8;
+				else if(spriteNum == 8) spriteNum = 9;
+				else if(spriteNum == 9) spriteNum = 1;               
+				spriteCounter = 0;
+			}
 		}
 
 		if(invincible == true){

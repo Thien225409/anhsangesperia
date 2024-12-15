@@ -13,6 +13,7 @@ public class OBJ_HP extends Entity{
         this.gp = gp;
         type = type_consumable;
         value = 2;
+        stackable = true;
         name = "Thuốc hồi phục II";
         down1 = setup("/objects/hp", gp.tileSize, gp.tileSize);
         decription = "[" + name + "]\nSử dụng để hồi phục \n" + value + "điểm HP.";

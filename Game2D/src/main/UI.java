@@ -649,9 +649,28 @@ public class UI {
         g2.fillRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
         // DRAW PLAYER'S ITEMS (Vẽ vật phẩm)
         for(int i = 0; i < gp.player.inventory.size(); i++){
-
-            g2.drawImage(gp.player.inventory.get(i).down1, slotX,slotY,null);
             
+            g2.drawImage(gp.player.inventory.get(i).down1, slotX,slotY,null);
+            // DISPLAY AMOUNT
+            if(gp.player.inventory.get(i).amount > 1){
+
+                g2.setFont(g2.getFont().deriveFont(20f));
+                int amountX;
+                int amountY;
+
+                String s = "" + gp.player.inventory.get(i).amount;
+                amountX = getXforAlignToRightText(s, slotX + 44);
+                amountY = slotY + gp.tileSize;
+
+                // SHADOW
+                g2.setColor(new Color(60,60,60));
+                g2.drawString(s, amountX, amountY);
+                // NUMBER
+                g2.setColor(Color.white);
+                g2.drawString(s, amountX-3, amountY-3);
+            }
+
+
             slotX += slotSize;
 
             if(i == 4 || i == 9 || i == 14){

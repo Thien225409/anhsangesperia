@@ -105,7 +105,6 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         player.setItems();
-        player.updateKey();
     }
     public void restart(){
 

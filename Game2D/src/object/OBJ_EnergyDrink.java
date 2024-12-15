@@ -12,6 +12,7 @@ public class OBJ_EnergyDrink extends Entity{
         this.gp = gp;
         type = type_consumable;
         value = 1;
+        stackable = true;
         name = "Thuốc tăng lực";
         down1 = setup("/objects/buff_attack", gp.tileSize, gp.tileSize);
         decription = "[" + name + "]\nSử dụng để tăng " + value + "\nđiểm tấn công.";

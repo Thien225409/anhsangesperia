@@ -110,8 +110,10 @@ public class Entity {
     public int attackValue;
     public int defenseValue;
     public String decription = "";
+
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
+    
     public boolean stackable = false;
     public int amount = 1;
     
@@ -417,10 +419,6 @@ public class Entity {
             int damage = attack - gp.player.defense;
             if(damage < 0) damage = 0;
             gp.player.life -= damage;
-            switch(this.direction){
-                case "left": gp.player.direction = "right";
-                case "right": gp.player.direction = "left";
-            }
             gp.player.invincible = true;
         }
     }

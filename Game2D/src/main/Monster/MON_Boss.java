@@ -27,7 +27,8 @@ public class MON_Boss extends Entity{
         solidArea.height = 102;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-
+		attackArea.width = 87;
+		attackArea.height = 56;
         getImage();
         getAttackImage();
     }	 
@@ -82,33 +83,37 @@ public class MON_Boss extends Entity{
     
     public void update(){
 
-        setAction();
-        checkCollison();
-        if(collisionOn == false){
-        	switch (direction) {
-            case "up": worldY -= speed; break;
-            case "down": worldY += speed; break;
-            case "right": worldX += speed; break;
-            case "left": worldX -= speed; break;        
-            default: break;
-            }
+		if(attacking == true){
+            attacking();
         }
+		else{
+			setAction();
+			checkCollison();
+			if(collisionOn == false){
+				switch (direction) {
+				case "up": worldY -= speed; break;
+				case "down": worldY += speed; break;
+				case "right": worldX += speed; break;
+				case "left": worldX -= speed; break;        
+				default: break;
+				}
+			}
 
-        spriteCounter ++;
-        if(spriteCounter > 5){
-            if(spriteNum == 1) spriteNum = 2;
-            else if(spriteNum == 2) spriteNum = 3;
-            else if(spriteNum == 3) spriteNum = 4;
-            else if(spriteNum == 4) spriteNum = 5;
-            else if(spriteNum == 5) spriteNum = 6;
-            else if(spriteNum == 6) spriteNum = 7;
-            else if(spriteNum == 7) spriteNum = 8;
-			else if(spriteNum == 8) spriteNum = 9;
-			else if(spriteNum == 9) spriteNum = 10;
-			else if(spriteNum == 10) spriteNum = 1;
-            spriteCounter = 0;
-        }
-
+			spriteCounter ++;
+			if(spriteCounter > 5){
+				if(spriteNum == 1) spriteNum = 2;
+				else if(spriteNum == 2) spriteNum = 3;
+				else if(spriteNum == 3) spriteNum = 4;
+				else if(spriteNum == 4) spriteNum = 5;
+				else if(spriteNum == 5) spriteNum = 6;
+				else if(spriteNum == 6) spriteNum = 7;
+				else if(spriteNum == 7) spriteNum = 8;
+				else if(spriteNum == 8) spriteNum = 9;
+				else if(spriteNum == 9) spriteNum = 10;
+				else if(spriteNum == 10) spriteNum = 1;
+				spriteCounter = 0;
+			}
+		}
         if(invincible == true){
             invincibleCounter ++;
             if(invincibleCounter > 40){
