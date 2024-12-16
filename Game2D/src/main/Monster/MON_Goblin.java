@@ -183,7 +183,6 @@ public class MON_Goblin extends Entity{
         }
 
         if(dying == true){
-            //TODO: Khi quái chết thì tải animation die của quái
             dyingCounter ++;
 
             int jump = 5;

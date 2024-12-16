@@ -8,6 +8,7 @@ import main.KeyHandler;
 import object.OBJ_EnergyDrink;
 import object.OBJ_HP;
 import object.OBJ_HP_half;
+
 public class Player extends Entity {
 
     KeyHandler keyH;
@@ -78,7 +79,7 @@ public class Player extends Entity {
 
     public void setItems(){
         inventory.clear();
-        //inventory.add(new OBJ_Key(gp));
+        // inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_HP(gp));
         inventory.add(new OBJ_HP_half(gp));
         inventory.add(new OBJ_EnergyDrink(gp));
@@ -414,9 +415,13 @@ public class Player extends Entity {
             
             Entity selectedItem = inventory.get(itemIndex);
             if(selectedItem.type  == type_consumable){
-                //TODO: Viết code cho phần sử dụng vật phẩm
                 if(selectedItem.use(this) == true){
-                    inventory.remove(itemIndex);
+                    if(selectedItem.amount > 1){
+                        selectedItem.amount --;
+                    }
+                    else{
+                        inventory.remove(itemIndex);
+                    }
                 }
             }
         }

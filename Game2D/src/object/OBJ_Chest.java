@@ -37,7 +37,6 @@ public class OBJ_Chest extends Entity {
 
             if(gp.player.canObtainItem(loot) == false){
                 sb.append("\n....Túi đồ đã đầy!");
-
             }
             else{
                 sb.append("\nBạn đã nhận được " + loot.name + "!");
