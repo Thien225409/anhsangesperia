@@ -16,7 +16,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
-    public int monsterKillCount = 0;
+    public boolean killBoss = false;
     public int standCounter = 0;
     public boolean attackCanceled = false;
 
@@ -49,27 +49,24 @@ public class Player extends Entity {
     }
     
     public void setDefaultValues(){
-        worldX = gp.tileSize * 60;
-        worldY = gp.tileSize * 5;
+        worldX = gp.tileSize * 3;
+        worldY = gp.tileSize * 16;
         speed = 3;
         direction = "up";
 
         // PLAYER STATUS (TRẠNG THÁI NHÂN VẬT)
         level = 1;
-        maxLife = 30;
+        maxLife = 6;
         life = maxLife;// 1 life = 1/2 heart
-        monsterKillCount = 0;
         exp = 0;
         nextLevelExp = 5;
-        attackValue = 1;
-        defenseValue = 1;
         attack = 1;
         defense = 1;
     }
     public void setDefaultPositions(){
         
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 3;
+        worldY = gp.tileSize * 16;
         direction = "up";
     }
     public void restoreLife(){
@@ -289,6 +286,9 @@ public class Player extends Entity {
         if(life <= 0){
             gp.gameState = gp.gameOverState;
         }
+        if(killBoss == true){
+            gp.gameState = gp.winState;
+        }
     }
     public void updateKey(){
         for(int  i = 0; i< inventory.size(); i++){
@@ -390,6 +390,7 @@ public class Player extends Entity {
                     gp.ui.addMessage("Đã tiêu diệt " + gp.monster[i].name + "!");
                     gp.ui.addMessage("Kinh nghiệm + " + gp.monster[i].exp);
                     exp += gp.monster[i].exp;
+                    if(gp.monster[i].name.equals("Final_Boss") == true) killBoss = true;
                     checkLevelUp();
                 }
             }

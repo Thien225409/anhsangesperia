@@ -45,8 +45,17 @@ public class KeyHandler implements KeyListener {
         else if(gp.gameState == gp.gameOverState){
             gameOverState(code);
         }
+        else if(gp.gameState == gp.winState){
+            winState(code);
+        }
     }
+    public void winState(int code){
+        if(code == KeyEvent.VK_ENTER){
+            gp.gameState = gp.titleState;
+            gp.ui.commandNum = 0;
+        }
 
+    }
     public void titleState(int code){
         if(code == KeyEvent.VK_W){
             gp.ui.commandNum --;

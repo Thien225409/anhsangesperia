@@ -24,6 +24,7 @@ public class UI {
     // BufferedImage keyImage;
     BufferedImage heart_full, heart_half, heart_blank;
     BufferedImage image = null;
+    BufferedImage imageTobeContinued;
     public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -32,6 +33,7 @@ public class UI {
     public int commandNum = 0;
     public int slotCol = 0;
     public int slotRow = 0;
+    int winStateCounter = 0;
     int subState = 0;
     public UI(GamePanel gp){
         this.gp = gp;
@@ -47,6 +49,7 @@ public class UI {
         heart_blank = heart.image3;
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/res/background/background_game.png"));
+            imageTobeContinued = ImageIO.read(getClass().getResourceAsStream("/res/background/tobecontinued.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,68 +59,13 @@ public class UI {
         message.add(text);
         messageCounter.add(0);
     }
-    // public void drawCenterTextUI(Font font, Color color, String text, int y){
-    //     g2.setFont(font);
-    //     g2.setColor(color);
-    //     int textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-    //     int xCenter = gp.screenWidth/2 - textLength/2;
-    //     g2.drawString(text, xCenter , y);
-    // }
-    //TODO: Hàm in ra Congratulation khi chiến thắng
-    /* public void draw(Graphics2D g2){
-        if(gameFinished == true){
-
-            String text;
-            
-            text = "You found the treasure!";
-            drawTextUI(g2, arial_40, Color.WHITE, text, gp.screenHeight/2 - gp.tileSize *3);
-
-            text = "Your Time is :" + dFormat.format(playTime) + "!";
-            drawTextUI(g2, arial_40, Color.WHITE, text, gp.screenHeight/2 + gp.tileSize *3);
-
-            text = "Congratulation!";
-            drawTextUI(g2, arial_80B, Color.YELLOW, text, gp.screenHeight/2 + gp.tileSize *2);
-
-            gp.gameThread = null;
-        }
-        else{
-            g2.setFont(arial_40);
-            g2.setColor(Color.WHITE);
-            g2.drawImage(keyImage, gp.tileSize/2, gp.tileSize/2, gp.tileSize , gp.tileSize, null);
-            g2.drawString("x " + gp.player.hasKey, 74, 62);
-            //TIME
-            playTime += (double)1/60;
-            g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 11, 62);
-
-            //MESSAGE
-            if(messageOn){
-
-                g2.setFont(g2.getFont().deriveFont(30F));
-                g2.drawString(message, gp.tileSize/2, gp.tileSize*5);
-
-                messageCounter ++;
-                if(messageCounter > 120){
-                    messageCounter = 0;
-                    messageOn = false;
-                }
-            }
-        }
-
-        this.g2 = g2;
-
-        g2.setFont(arial_40);
-        g2.setColor(Color.WHITE);
-
-        if(gp.gameState == gp.playState){
-
-        }
-        if(gp.gameState == gp.OptionsState){
-
-            drawOptionsScreen();
-
-        }
+    public void drawCenterTextUI(Font font, Color color, String text, int y){
+        g2.setFont(font);
+        g2.setColor(color);
+        int textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int xCenter = gp.screenWidth/2 - textLength/2;
+        g2.drawString(text, xCenter , y);
     }
-    */
     public void draw(Graphics2D g2){
 
         this.g2 = g2;
@@ -151,6 +99,30 @@ public class UI {
         // GAME OVER STATE
         if(gp.gameState == gp.gameOverState){
             drawGameOverScreen();
+        }
+        if(gp.gameState == gp.winState){
+            drawWinScreen();
+        }
+    }
+    public void drawWinScreen(){
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        int x;
+        int y;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+
+        text = "Congratulation!";
+        //Shadow
+        g2.setColor(Color.yellow);
+        x = getXforCenterText(text);
+        y = gp.tileSize*4;
+        g2.drawString(text, x, y);
+
+        winStateCounter ++;
+        if(winStateCounter >= 180){
+            g2.drawImage(imageTobeContinued,0,0,gp.screenWidth,gp.screenHeight,null);	            
         }
     }
     public void drawGameOverScreen(){

@@ -1,10 +1,9 @@
 package main.Monster;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.nio.file.WatchKey;
-
 import entity.Entity;
 import main.GamePanel;
 
@@ -20,7 +19,6 @@ public class MON_Boss extends Entity{
         maxLife = 20;
         life = maxLife;
 		exp = 10;
-
         attack = 4;
         defense = 2;
 
@@ -325,14 +323,21 @@ public class MON_Boss extends Entity{
         }
 
         // Monster HP bar
-        if(type == 2 && hpBarOn == true){
-            double oneScale = (double) gp.tileSize/maxLife;
+        if(hpBarOn == true){
+            double oneScale = (double) gp.tileSize*8/maxLife;
             double hpBarValue = oneScale*life;
 
+			int x = gp.screenWidth/2 - gp.tileSize*4;
+			int y = gp.tileSize*10;
+
             g2.setColor(new Color(35,35,35));
-            g2.fillRect(screenX +45 ,screenY - 16,gp.tileSize+2,7);
+            g2.fillRect(x-1,y-1,gp.tileSize*8+2,22);
             g2.setColor(new Color(255,0,30));
-            g2.fillRect(screenX +46, screenY-15, (int) hpBarValue, 5);
+            g2.fillRect(x, y, (int) hpBarValue, 20);
+
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24f));
+			g2.setColor(Color.white);
+			g2.drawString("Final Boss",x+4, y-10);
 
             hpBarCounter++;
             if(hpBarCounter > 600){
@@ -374,7 +379,6 @@ public class MON_Boss extends Entity{
 	public void damageReaction(){
         actionLockCounter = 0;
     }
-
     public void setAction() {
 		getRandomDirection();
 		if(attacking == false) {

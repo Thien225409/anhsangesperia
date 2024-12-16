@@ -11,6 +11,8 @@ import main.GamePanel;
 public class SaveLoad {
 
     GamePanel gp;
+    ObjectOutputStream oos;
+    ObjectInputStream ois;
 
     public SaveLoad(GamePanel gp){
         this.gp = gp;
@@ -19,7 +21,7 @@ public class SaveLoad {
     public void save(){
         
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
+            oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
 
             DataStorage ds = new DataStorage();
             ds.level = gp.player.level;
@@ -34,7 +36,6 @@ public class SaveLoad {
             ds.inventory = gp.player.inventory;
             // Write the DataStorage object
             oos.writeObject(ds);
-
         } catch (Exception e) {
             System.out.println("Save Exception");
         }
@@ -42,7 +43,7 @@ public class SaveLoad {
     }
     public void load(){
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
+            ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
 
             // Read the datastorage object
             DataStorage ds = (DataStorage) ois.readObject();
@@ -56,6 +57,7 @@ public class SaveLoad {
             gp.player.worldX = ds.worldX;
             gp.player.worldY = ds.worldY;
             gp.player.inventory = ds.inventory;
+            
         } catch (Exception e) {
             System.out.println("Load Exception!");
         }
