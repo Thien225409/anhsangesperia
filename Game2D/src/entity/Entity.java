@@ -267,7 +267,7 @@ public class Entity {
                 shotAvailableCounter = 0;
             }
         }
-        if(targetInRange == false){
+        else{
             attacking = false;
         }
     }
@@ -353,10 +353,8 @@ public class Entity {
 
             // Chỉ thay đổi vùng va chạm của player khi attack
             switch(direction){
-                case "up": worldX += attackArea.height; break;
-                case "down": worldX -= attackArea.width; break;
-                case "left": worldX -= attackArea.width; break;
-                case "right": worldX += attackArea.width; break;
+                case "up","right","up_right","down_right": worldX += attackArea.height; break;
+                case "down","left","down_left","up_left": worldX -= attackArea.width; break;
             }
             // Attack area becomes solidArea (chuyển vùng bị tấn công thành vùng rắn)
             solidArea.width = attackArea.width;
@@ -380,10 +378,8 @@ public class Entity {
 
             // Chỉ thay đổi vùng va chạm của player khi attack
             switch(direction){
-                case "up": worldX += attackArea.height; break;
-                case "down": worldX -= attackArea.width; break;
-                case "left": worldX -= attackArea.width; break;
-                case "right": worldX += attackArea.width; break;
+                case "up","right","up_right","down_right": worldX += attackArea.height; break;
+                case "down","left","down_left","up_left": worldX -= attackArea.width; break;
             }
             // Attack area becomes solidArea (chuyển vùng bị tấn công thành vùng rắn)
             solidArea.width = attackArea.width;
@@ -485,7 +481,7 @@ public class Entity {
                 break;
             case "down":
                 if(attacking == false){
-
+                    
                     if(spriteNum == 1) image = down1;
                     if(spriteNum == 2) image = down2;
                     if(spriteNum == 3) image = down3;

@@ -315,7 +315,7 @@ public class AssetSetter {
         gp.monster[60].worldY = gp.tileSize *6;
         
         gp.monster[61] = new MON_Boss(gp);
-        gp.monster[61].worldX = gp.tileSize *64;
+        gp.monster[61].worldX = gp.tileSize *60;
         gp.monster[61].worldY = gp.tileSize *5;
 
     }
