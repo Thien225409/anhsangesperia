@@ -14,6 +14,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import AI.PathFinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -56,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
+    public SaveLoad saveLoad = new SaveLoad(this);
 
     // EVENT HANDLER (Xử lý sự kiện)
     public EventHandler eHandler = new EventHandler(this);

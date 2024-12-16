@@ -19,7 +19,8 @@ public class OBJ_Key extends Entity {
         gp.gameState = gp.dialogueState;
         int npcIndex = gp.cChecker.checkEntity(entity, gp.npc);
         if(npcIndex != 999){
-            gp.ui.currentDialogue = "Chúc cậu may mắn, quái vật bên trong sẽ mới chỉ là một thách thức nhỏ trong hành trình của cậu!";
+            gp.ui.currentDialogue = "Chúc cậu may mắn, quái vật bên trong sẽ mới chỉ là một thách thức nhỏ trong hành trình của cậu! Hành trình của cậu đã được ta lưu lại ở đây";
+            gp.saveLoad.save();
             gp.npc[npcIndex] = null;
             return true;
         }

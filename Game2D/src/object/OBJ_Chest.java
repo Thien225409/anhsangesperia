@@ -30,6 +30,7 @@ public class OBJ_Chest extends Entity {
     }
 
     public void interact(){
+        gp.saveLoad.save();
         gp.gameState = gp.dialogueState;
         if(opened == false){
 
